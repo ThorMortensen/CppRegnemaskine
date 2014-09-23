@@ -1,0 +1,7 @@
+// 
+// 
+// 
+
+#include "RegneLogik.h"
+
+
