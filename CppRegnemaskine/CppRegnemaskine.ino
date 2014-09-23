@@ -100,7 +100,7 @@ void getFistNumber (char firstInput)
         
         index = 0;
         showOpereator(op);
-                         input = pad.readKeyASCII();
+        input = pad.readKeyASCII();
         
         if (input <= '9' && input > 0)//Only numbers
         {
@@ -126,7 +126,7 @@ void getFistNumber (char firstInput)
         }
     }
 
-
+}
 
 
 
