@@ -129,6 +129,13 @@ void getFistNumber (char firstInput)
 }
 
 
+//
+    void loop()
+    {
+        startScreen();
+        getFistNumber(pad.readKeyASCII());
+        Serial.print("back");
+    }
 
     void loop()
     {
@@ -136,3 +143,28 @@ void getFistNumber (char firstInput)
         getFistNumber(pad.readKeyASCII());
         Serial.print("back");
     }
+        void loop()
+        {
+            startScreen();
+            getFistNumber(pad.readKeyASCII());
+            Serial.print("back");
+        }
+            void loop()
+            {
+                startScreen();
+                getFistNumber(pad.readKeyASCII());
+                Serial.print("back");
+            }
+                void loop()
+                {
+                    startScreen();
+                    getFistNumber(pad.readKeyASCII());
+                    Serial.print("back");
+                }
+                    void loop()
+                    {
+                        startScreen();
+                        getFistNumber(pad.readKeyASCII());
+                        Serial.print("back");
+                    }
+                    
