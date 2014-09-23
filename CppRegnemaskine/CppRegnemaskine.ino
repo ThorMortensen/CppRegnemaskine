@@ -52,7 +52,7 @@ void startScreen (void)
 
 void showOpereator (char op)
 {
-    lcd.setCursor(0,16);
+    lcd.setCursor(15,0);
     switch (op)
     {
         case 'F':
@@ -87,7 +87,8 @@ void getFistNumber (char firstInput)
             if (input <= '9' && input > 0)
             {
                 firstNumber[index++]=input;
-                Serial.print(strlen(firstNumber));
+                Serial.println("n1:");
+                Serial.println((firstNumber));
                 lcd.clear();
                 lcd.print(firstNumber);
             }
@@ -104,18 +105,20 @@ void getFistNumber (char firstInput)
         
         if (input <= '9' && input > 0)//Only numbers
         {
-            firstNumber[0]=input;
-            lcd.clear();
-            lcd.print(firstNumber);
+            secondNumber[index++]=input;
+            lcd.setCursor(1,1);
+            lcd.print(secondNumber);
+            Serial.println("2n:");
+            Serial.println((secondNumber));
             while (index <= NUMBER_SIZE)
             {
                 input = pad.readKeyASCII();
                 if (input <= '9' && input > 0)
                 {
-                    firstNumber[index++]=input;
-                    Serial.print(strlen(firstNumber));
-                    lcd.clear();
-                    lcd.print(firstNumber);
+                    secondNumber[index++]=input;
+                    Serial.println("2n:");
+                    Serial.println((secondNumber));
+                    lcd.print(secondNumber);
                 }
                 else
                 {
@@ -137,10 +140,4 @@ void getFistNumber (char firstInput)
         Serial.print("back");
     }
 
-    void loop()
-    {
-        startScreen();
-        getFistNumber(pad.readKeyASCII());
-        Serial.print("back");
-    }
                     
