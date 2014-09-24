@@ -27,7 +27,7 @@ char op = 0;
 void setup()
 {
     Serial.begin(9600);
-    lcdStart();
+    lcd.begin(16,2);
     for (int i=0;i < NUMBER_SIZE;i++)//Init strings for Arduino functions
     {
         firstNumber[i] = ' ';
@@ -98,7 +98,7 @@ void getFistNumber (char firstInput)
                 break;
             }
         }
-        
+      
         index = 0;
         showOpereator(op);
         input = pad.readKeyASCII();
@@ -106,18 +106,20 @@ void getFistNumber (char firstInput)
         if (input <= '9' && input > 0)//Only numbers
         {
             secondNumber[index++]=input;
-            lcd.setCursor(1,1);
-            lcd.print(secondNumber);
+            lcd.setCursor(0,1);
+            lcd.println(secondNumber);
             Serial.println("2n:");
             Serial.println((secondNumber));
             while (index <= NUMBER_SIZE)
             {
+                Serial.println("here");
                 input = pad.readKeyASCII();
                 if (input <= '9' && input > 0)
                 {
                     secondNumber[index++]=input;
-                    Serial.println("2n:");
+                    Serial.println("222n:");
                     Serial.println((secondNumber));
+                    lcd.setCursor(0,1);
                     lcd.print(secondNumber);
                 }
                 else
@@ -135,9 +137,11 @@ void getFistNumber (char firstInput)
 //
     void loop()
     {
+        
         startScreen();
         getFistNumber(pad.readKeyASCII());
         Serial.print("back");
+        while(1);
     }
 
                     
