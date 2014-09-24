@@ -1,6 +1,26 @@
-#include "RegneLogik.h"
+/*==============================================================================
+|  Assignment:  Bugler Alarm
+|      Author:  Thor Mortensen
+|    Language:  Arduino C
+|    Compiler:  AVR-Studio 6 AVR-GCC
+|      Course:  62505 Introduktion til indlejrede systemer
+|     Teacher:  Kurt Jeritslev
+|    Due Date:  Week 38
++-------------------------------------------------------------------------------
+|       Class: BuglerAlarmMain
+| Description: Handle simple scheduler to run the tasks at predefined intervals
+|
+|   Functions: void setup()
+|				extern void burnPromPass (char *promPass)
+|				extern void loadPromPass (void)
+|              void scheduler (void)
+|				void loop()
++-------------------------------------------------------------------------------
+|		  MEMO: C strings must be initialized with char's before manipulation
+|				to move terminator 0 to end of string. Else Arduino's string
+|				functions will misbehave!!!!
+*=============================================================================*/
 #include "LiquidCrystal.h"
-#include "UseLCD.h"
 #include "keypad4x4.h"
 
 #define NUMBER_SIZE 15
@@ -28,19 +48,7 @@ void setup()
 {
     Serial.begin(9600);
     lcd.begin(16,2);
-    for (int i=0;i < NUMBER_SIZE;i++)//Init strings for Arduino functions
-    {
-        firstNumber[i] = ' ';
-        secondNumber[i] = ' ';
-        result[i] = ' ';
-    }
-}
-
-void getInput (void)
-{
-    char input = pad.readKeyASCII();
-    
-    
+    claerNumbers();
 }
 
 void startScreen (void)
@@ -48,6 +56,17 @@ void startScreen (void)
     lcd.clear();
     lcd.setCursor(0,0);
     lcd.print("Skriv et tal");
+}
+
+void claerNumbers (void)
+{
+    for (int i=0;i < NUMBER_SIZE;i++)//Init strings for Arduino functions
+    {
+        firstNumber[i] = ' ';
+        secondNumber[i] = ' ';
+        result[i] = ' ';
+    }
+    
 }
 
 void showOpereator (char op)
@@ -71,6 +90,32 @@ void showOpereator (char op)
 }
 
 
+void calc(char input)
+{
+    int32_t nr1,nr2; //long
+    
+    nr1 = atoi(firstNumber);//Convert string to nr
+    nr2 = atoi(secondNumber);
+    
+    switch (op)
+    {
+        case 'F':
+        sprintf(result,"%ld",nr1+nr2);
+        break;
+        case 'E':
+        sprintf(result,"%ld",nr1-nr2);
+        break;
+        case 'D':
+        sprintf(result,"%ld",nr1*nr2);
+        break;
+        case 'C':
+        sprintf(result,"%ld",nr1/nr2);
+        break;
+    }
+    lcd.clear();
+    lcd.print(result);
+}
+
 void getFistNumber (char firstInput)
 {
     uint8_t index = 1;
@@ -78,6 +123,7 @@ void getFistNumber (char firstInput)
     
     if (input <= '9' && input > 0)//Only numbers
     {
+        claerNumbers();
         firstNumber[0]=input;
         lcd.clear();
         lcd.print(firstNumber);
@@ -98,7 +144,7 @@ void getFistNumber (char firstInput)
                 break;
             }
         }
-      
+        
         index = 0;
         showOpereator(op);
         input = pad.readKeyASCII();
@@ -122,9 +168,9 @@ void getFistNumber (char firstInput)
                     lcd.setCursor(0,1);
                     lcd.print(secondNumber);
                 }
-                else
+                else if (input == 'A')
                 {
-                    op = input;
+                    calc(input);
                     break;
                 }
             }
@@ -134,14 +180,13 @@ void getFistNumber (char firstInput)
 }
 
 
-//
-    void loop()
+void loop()
+{
+    
+    startScreen();
+    while (1)
     {
-        
-        startScreen();
         getFistNumber(pad.readKeyASCII());
-        Serial.print("back");
-        while(1);
     }
+}
 
-                    

@@ -9,6 +9,7 @@
 */
 
 #define __AVR_ATmega2560__
+#define _VMDEBUG 1
 #define ARDUINO 101
 #define ARDUINO_MAIN
 #define F_CPU 16000000L
@@ -17,18 +18,15 @@
 extern "C" void __cxa_pure_virtual() {;}
 
 //
-void getInput (void);
 void startScreen (void);
+void claerNumbers (void);
 void showOpereator (char op);
+void calc(char input);
 void getFistNumber (char firstInput);
 //
 
 #include "C:\Program Files (x86)\Arduino\hardware\arduino\variants\mega\pins_arduino.h" 
 #include "C:\Program Files (x86)\Arduino\hardware\arduino\cores\arduino\arduino.h"
 #include "C:\Users\Thor\Dropbox\DTU\Digital Elektronik\Arduino Projects\CppRegnemaskine\CppRegnemaskine\CppRegnemaskine.ino"
-#include "C:\Users\Thor\Dropbox\DTU\Digital Elektronik\Arduino Projects\CppRegnemaskine\CppRegnemaskine\RegneLogik.cpp"
-#include "C:\Users\Thor\Dropbox\DTU\Digital Elektronik\Arduino Projects\CppRegnemaskine\CppRegnemaskine\RegneLogik.h"
-#include "C:\Users\Thor\Dropbox\DTU\Digital Elektronik\Arduino Projects\CppRegnemaskine\CppRegnemaskine\UseLCD.cpp"
-#include "C:\Users\Thor\Dropbox\DTU\Digital Elektronik\Arduino Projects\CppRegnemaskine\CppRegnemaskine\UseLCD.h"
 #include "C:\Users\Thor\Dropbox\DTU\Digital Elektronik\Arduino Projects\CppRegnemaskine\CppRegnemaskine\keypad4x4.cpp"
 #include "C:\Users\Thor\Dropbox\DTU\Digital Elektronik\Arduino Projects\CppRegnemaskine\CppRegnemaskine\keypad4x4.h"
